@@ -1,0 +1,454 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2761
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset0 .SFNS-Bold;\f1\fnil\fcharset0 .SFNS-Regular;\f2\fnil\fcharset0 .AppleSystemUIFontMonospaced-Regular;
+\f3\froman\fcharset0 TimesNewRomanPSMT;}
+{\colortbl;\red255\green255\blue255;\red14\green14\blue14;}
+{\*\expandedcolortbl;;\cssrgb\c6700\c6700\c6700;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl324\slmult1\pardirnatural\partightenfactor0
+
+\f0\b\fs44 \cf2 DR1 & DR2 Grasshopper Script Walkthrough
+\f1\b0\fs28 \
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl324\slmult1\pardirnatural\partightenfactor0
+
+\f0\b\fs34 \cf2 1. DFL Robot Setup
+\f1\b0\fs28 \
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl324\slmult1\pardirnatural\partightenfactor0
+
+\f0\b \cf2 Image File:
+\f1\b0  
+\f2 DFL Robot Setup.png
+\f1 \
+
+\f0\b Relative Link:
+\f1\b0  
+\f2 /path/to/DFL Robot Setup.png
+\f1 \
+\
+This section initializes the robot and sets up its initial parameters.\
+\
+\pard\tqr\tx260\tx420\li420\fi-420\sl324\slmult1\partightenfactor0
+
+\f3 \cf2 	1.	
+\f0\b Robot Selection
+\f1\b0 : Chooses the UR5 robot model and converts initial pose angles into radians.\
+
+\f3 	2.	
+\f0\b Speed and Accuracy
+\f1\b0 : Configures the robot\'92s controlled and transfer speeds, along with zone accuracy for precision.\
+
+\f3 	3.	
+\f0\b Fixture Setup
+\f1\b0 : Specifies the fixture in use, with custom offsets for accurate robot positioning within the workspace.\
+
+\f3 	4.	
+\f0\b Tool Setup
+\f1\b0 : Configures the pen tool\'92s parameters, including length, diameter, weight, and TCP (Tool Center Point) settings for precise operation.\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl324\slmult1\pardirnatural\partightenfactor0
+\cf2 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl324\slmult1\pardirnatural\partightenfactor0
+
+\f0\b\fs34 \cf2 2. DFL Import Drawing and Order Program
+\f1\b0\fs28 \
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl324\slmult1\pardirnatural\partightenfactor0
+
+\f0\b \cf2 Image File:
+\f1\b0  
+\f2 DFL Import Drawing and Order Program.png
+\f1 \
+
+\f0\b Relative Link:
+\f1\b0  
+\f2 /path/to/DFL Import Drawing and Order Program.png
+\f1 \
+\
+This cluster handles the import of drawing data from Illustrator files and organizes the drawing operations.\
+\
+\pard\tqr\tx260\tx420\li420\fi-420\sl324\slmult1\partightenfactor0
+
+\f3 \cf2 	1.	
+\f0\b Drawing Import
+\f1\b0 : Imports multiple layers (Cyan, Magenta, Yellow, Black) from Illustrator, with options for strokes or fills.\
+
+\f3 	2.	
+\f0\b Operations Order
+\f1\b0 : Organizes imported curves into a sequence for execution.\
+
+\f3 	3.	
+\f0\b Point Management
+\f1\b0 : Controls the number of points to ensure they stay within acceptable limits, maintaining efficiency.\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl324\slmult1\pardirnatural\partightenfactor0
+\cf2 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl324\slmult1\pardirnatural\partightenfactor0
+
+\f0\b\fs34 \cf2 3. DFL Plane and Target Generation
+\f1\b0\fs28 \
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl324\slmult1\pardirnatural\partightenfactor0
+
+\f0\b \cf2 Image File:
+\f1\b0  
+\f2 DFL Plane and Target Generation.png
+\f1 \
+
+\f0\b Relative Link:
+\f1\b0  
+\f2 /path/to/DFL Plane and Target Generation.png
+\f1 \
+\
+This section generates planes and targets for the robot to follow during the drawing process.\
+\
+\pard\tqr\tx260\tx420\li420\fi-420\sl324\slmult1\partightenfactor0
+
+\f3 \cf2 	1.	
+\f0\b Curve to Plane Conversion
+\f1\b0 : Translates curves into planes that define drawing targets for the robot.\
+
+\f3 	2.	
+\f0\b Target Adjustment
+\f1\b0 : Fine-tunes target planes to align them with the robot\'92s TCP and workspace.\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl324\slmult1\pardirnatural\partightenfactor0
+\cf2 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl324\slmult1\pardirnatural\partightenfactor0
+
+\f0\b\fs34 \cf2 4. DFL Linear Hatch
+\f1\b0\fs28 \
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl324\slmult1\pardirnatural\partightenfactor0
+
+\f0\b \cf2 Image File:
+\f1\b0  
+\f2 DFL Linear Hatch.png
+\f1 \
+
+\f0\b Relative Link:
+\f1\b0  
+\f2 /path/to/DFL Linear Hatch.png
+\f1 \
+\
+This part of the script generates linear hatches within specified boundaries, adding detailed fills to the drawing.\
+\
+\pard\tqr\tx260\tx420\li420\fi-420\sl324\slmult1\partightenfactor0
+
+\f3 \cf2 	1.	
+\f0\b Hatch Parameters
+\f1\b0 : Defines frequency, pen tip diameter, and angle for the hatches.\
+
+\f3 	2.	
+\f0\b Hatch Creation
+\f1\b0 : Generates linear hatches within specified boundaries and trims them to fit surface limits.\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl324\slmult1\pardirnatural\partightenfactor0
+\cf2 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl324\slmult1\pardirnatural\partightenfactor0
+
+\f0\b\fs34 \cf2 5. Robotic Movements
+\f1\b0\fs28 \
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl324\slmult1\pardirnatural\partightenfactor0
+
+\f0\b \cf2 Image File:
+\f1\b0  
+\f2 DFL Robotic movements.png
+\f1 \
+
+\f0\b Relative Link:
+\f1\b0  
+\f2 /path/to/DFL Robotic movements.png
+\f1 \
+\
+This cluster manages the actual movement commands for the robot, including custom pop-up messages for user interaction.\
+\
+\pard\tqr\tx260\tx420\li420\fi-420\sl324\slmult1\partightenfactor0
+
+\f3 \cf2 	1.	
+\f0\b Custom Pop-ups
+\f1\b0 : Displays messages to the user during the robot\'92s operation, prompting necessary actions like pen changes.\
+
+\f3 	2.	
+\f0\b Linear Movements
+\f1\b0 : Commands the robot to make linear movements based on the target planes with controlled speeds.\
+
+\f3 	3.	
+\f0\b Completion Message
+\f1\b0 : Notifies the user when the job is complete, with instructions for cleanup.\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl324\slmult1\pardirnatural\partightenfactor0
+\cf2 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl324\slmult1\pardirnatural\partightenfactor0
+
+\f0\b\fs34 \cf2 6. DFL Simulate and Export
+\f1\b0\fs28 \
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl324\slmult1\pardirnatural\partightenfactor0
+
+\f0\b \cf2 Image File:
+\f1\b0  
+\f2 DFL Simulate and Export.png
+\f1 \
+
+\f0\b Relative Link:
+\f1\b0  
+\f2 /path/to/DFL Simulate and Export.png
+\f1 \
+\
+This section simulates the drawing process and prepares the data for export to the robot controller.\
+\
+\pard\tqr\tx260\tx420\li420\fi-420\sl324\slmult1\partightenfactor0
+
+\f3 \cf2 	1.	
+\f0\b Simulation
+\f1\b0 : Runs a simulation of the robot\'92s drawing path, identifying potential errors or warnings.\
+
+\f3 	2.	
+\f0\b Analysis
+\f1\b0 : Provides feedback on the program\'92s performance, including duration, errors, and warnings.\
+
+\f3 	3.	
+\f0\b Export
+\f1\b0 : Saves the program as a URP file for the UR5 robot, with options for backup and file management.\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl324\slmult1\pardirnatural\partightenfactor0
+\cf2 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl324\slmult1\pardirnatural\partightenfactor0
+
+\f0\b\fs34 \cf2 Components Explained
+\f1\b0\fs28 \
+\
+Here are concise explanations of key components used throughout the script, with components numbered in their logical flow:\
+\
+\pard\tqr\tx260\tx420\li420\fi-420\sl324\slmult1\partightenfactor0
+
+\f3 \cf2 	1.	
+\f0\b Reorient Planes in Axis for TCP
+\f1\b0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl324\slmult1\pardirnatural\partightenfactor0
+
+\f0\b \cf2 Image File:
+\f1\b0  
+\f2 DFL re orient planes in axis for TCP.png
+\f1 \
+
+\f0\b Relative Link:
+\f1\b0  
+\f2 /path/to/DFL re orient planes in axis for TCP.png
+\f1 \
+\pard\tqr\tx500\tx660\li660\fi-660\sl324\slmult1\partightenfactor0
+\cf2 	\'95	
+\f0\b Purpose
+\f1\b0 : Fine-tunes the orientation of planes along a specified axis to ensure the Tool Center Point (TCP) is correctly aligned for drawing operations.\
+	\'95	
+\f0\b Flow
+\f1\b0 : Start \uc0\u8594  Plane Input \u8594  Rotation Axis \u8594  Fine Adjustment \u8594  Rotated Planes Output\
+\pard\tqr\tx260\tx420\li420\fi-420\sl324\slmult1\partightenfactor0
+
+\f3 \cf2 	2.	
+\f0\b Curve to Target Plane
+\f1\b0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl324\slmult1\pardirnatural\partightenfactor0
+
+\f0\b \cf2 Image File:
+\f1\b0  
+\f2 DFL Curve to Target Plane.png
+\f1 \
+
+\f0\b Relative Link:
+\f1\b0  
+\f2 /path/to/DFL Curve to Target Plane.png
+\f1 \
+\pard\tqr\tx500\tx660\li660\fi-660\sl324\slmult1\partightenfactor0
+\cf2 	\'95	
+\f0\b Purpose
+\f1\b0 : Converts drawing curves into target planes for the robot to follow.\
+	\'95	
+\f0\b Flow
+\f1\b0 : Curves Input \uc0\u8594  Transfer Plane \u8594  Target Planes Output\
+\pard\tqr\tx260\tx420\li420\fi-420\sl324\slmult1\partightenfactor0
+
+\f3 \cf2 	3.	
+\f0\b Make Transfer and Pressure Planes
+\f1\b0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl324\slmult1\pardirnatural\partightenfactor0
+
+\f0\b \cf2 Image File:
+\f1\b0  
+\f2 DFL make Transfer and Pressure Planes.png
+\f1 \
+
+\f0\b Relative Link:
+\f1\b0  
+\f2 /path/to/DFL make Transfer and Pressure Planes.png
+\f1 \
+\pard\tqr\tx500\tx660\li660\fi-660\sl324\slmult1\partightenfactor0
+\cf2 	\'95	
+\f0\b Purpose
+\f1\b0 : Creates transfer and pressure planes that control the pen\'92s movement between drawing paths and how much pressure it applies.\
+	\'95	
+\f0\b Flow
+\f1\b0 : Pen Transfer Height \uc0\u8594  Pen Pressure Settings \u8594  Pressure and Transfer Planes Output\
+\pard\tqr\tx260\tx420\li420\fi-420\sl324\slmult1\partightenfactor0
+
+\f3 \cf2 	4.	
+\f0\b Add Leads
+\f1\b0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl324\slmult1\pardirnatural\partightenfactor0
+
+\f0\b \cf2 Image File:
+\f1\b0  
+\f2 DFL Add leads.png
+\f1 \
+
+\f0\b Relative Link:
+\f1\b0  
+\f2 /path/to/DFL Add leads.png
+\f1 \
+\pard\tqr\tx500\tx660\li660\fi-660\sl324\slmult1\partightenfactor0
+\cf2 	\'95	
+\f0\b Purpose
+\f1\b0 : Adds lead-in and lead-out segments to the drawing paths to ensure smooth transitions.\
+	\'95	
+\f0\b Flow
+\f1\b0 : Curve Input \uc0\u8594  Lead Creation \u8594  Curves with Leads Output\
+\pard\tqr\tx260\tx420\li420\fi-420\sl324\slmult1\partightenfactor0
+
+\f3 \cf2 	5.	
+\f0\b Four Point Calibration
+\f1\b0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl324\slmult1\pardirnatural\partightenfactor0
+
+\f0\b \cf2 Image File:
+\f1\b0  
+\f2 DFL Four Point Calibration.png
+\f1 \
+
+\f0\b Relative Link:
+\f1\b0  
+\f2 /path/to/DFL Four Point Calibration.png
+\f1 \
+\pard\tqr\tx500\tx660\li660\fi-660\sl324\slmult1\partightenfactor0
+\cf2 	\'95	
+\f0\b Purpose
+\f1\b0 : Calibrates the TCP by defining four points on the workspace, ensuring accurate alignment of the robot\'92s movements.\
+	\'95	
+\f0\b Flow
+\f1\b0 : Calibration Points Input \uc0\u8594  Calibration Process \u8594  Calibrated Plane Output\
+\pard\tqr\tx260\tx420\li420\fi-420\sl324\slmult1\partightenfactor0
+
+\f3 \cf2 	6.	
+\f0\b Custom Popup
+\f1\b0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl324\slmult1\pardirnatural\partightenfactor0
+
+\f0\b \cf2 Image File:
+\f1\b0  
+\f2 DFL Custom Popup.png
+\f1 \
+
+\f0\b Relative Link:
+\f1\b0  
+\f2 /path/to/DFL Custom Popup.png
+\f1 \
+\pard\tqr\tx500\tx660\li660\fi-660\sl324\slmult1\partightenfactor0
+\cf2 	\'95	
+\f0\b Purpose
+\f1\b0 : Creates custom pop-up messages for user interaction during the robot\'92s operation.\
+	\'95	
+\f0\b Flow
+\f1\b0 : Popup Text \uc0\u8594  Display Conditions \u8594  Popup Command Output\
+\pard\tqr\tx260\tx420\li420\fi-420\sl324\slmult1\partightenfactor0
+
+\f3 \cf2 	7.	
+\f0\b Drawing Setup
+\f1\b0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl324\slmult1\pardirnatural\partightenfactor0
+
+\f0\b \cf2 Image File:
+\f1\b0  
+\f2 DFL Drawing Setup.png
+\f1 \
+
+\f0\b Relative Link:
+\f1\b0  
+\f2 /path/to/DFL Drawing Setup.png
+\f1 \
+\pard\tqr\tx500\tx660\li660\fi-660\sl324\slmult1\partightenfactor0
+\cf2 	\'95	
+\f0\b Purpose
+\f1\b0 : Configures the drawing setup, including paper size and alignment within the workspace.\
+	\'95	
+\f0\b Flow
+\f1\b0 : Paper Size \uc0\u8594  Calibration Plane \u8594  Paper Plane Output\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl324\slmult1\pardirnatural\partightenfactor0
+\cf2 \
+
+\f0\b\fs44 DR2 Advanced Script Overview
+\f1\b0\fs28 \
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl324\slmult1\pardirnatural\partightenfactor0
+
+\f0\b\fs30 \cf2 Layer Management and Multiple Tool Heads
+\f1\b0\fs28 \
+\
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl324\slmult1\pardirnatural\partightenfactor0
+
+\f0\b \cf2 DR2
+\f1\b0  introduces advanced features that enable the use of multiple tool heads and more complex layer management for drawing operations.\
+\
+\pard\tqr\tx260\tx420\li420\fi-420\sl324\slmult1\partightenfactor0
+
+\f3 \cf2 	1.	
+\f0\b Layer Prioritization and Operations Order
+\f1\b0 \
+\pard\tx560\tx1120\tx1680\tx2240\tx2800\tx3360\tx3920\tx4480\tx5040\tx5600\tx6160\tx6720\sl324\slmult1\pardirnatural\partightenfactor0
+
+\f0\b \cf2 Image File:
+\f1\b0  
+\f2 DR2.png
+\f1 \
+
+\f0\b Relative Link:
+\f1\b0  
+\f2 /path/to/DR2.png
+\f1 \
+\pard\tqr\tx500\tx660\li660\fi-660\sl324\slmult1\partightenfactor0
+\cf2 	\'95	
+\f0\b Purpose
+\f1\b0 : Manages multiple drawing layers with precise control over execution order.\
+	\'95	
+\f0\b Flow
+\f1\b0 : Layer Import \uc0\u8594  Operations Order \u8594  Execution\
+\pard\tqr\tx260\tx420\li420\fi-420\sl324\slmult1\partightenfactor0
+
+\f3 \cf2 	2.	
+\f0\b Multiple Tool Heads
+\f1\b0 \
+\pard\tqr\tx500\tx660\li660\fi-660\sl324\slmult1\partightenfactor0
+\cf2 	\'95	
+\f0\b Tool Head Switching
+\f1\b0 : Enables switching between different tools based on layer and task requirements.\
+	\'95	
+\f0\b Flow
+\f1\b0 : Tool Selection \uc0\u8594  Tool Data Management \u8594  TCP Adjustment\
+\pard\tqr\tx260\tx420\li420\fi-420\sl324\slmult1\partightenfactor0
+
+\f3 \cf2 	3.	
+\f0\b Advanced Path Planning and Simultaneous Operations
+\f1\b0 \
+\pard\tqr\tx500\tx660\li660\fi-660\sl324\slmult1\partightenfactor0
+\cf2 	\'95	
+\f0\b Advanced Path Optimization
+\f1\b0 : Optimizes the robot\'92s movements to reduce tool change time and ensure efficiency.\
+	\'95	
+\f0\b Flow
+\f1\b0 : Path Generation \uc0\u8594  Optimization \u8594  Execution Order\
+\pard\tqr\tx260\tx420\li420\fi-420\sl324\slmult1\partightenfactor0
+
+\f3 \cf2 	4.	
+\f0\b Dynamic Toolpath Reordering
+\f1\b0 \
+\pard\tqr\tx500\tx660\li660\fi-660\sl324\slmult1\partightenfactor0
+\cf2 	\'95	
+\f0\b On-the-Fly Adjustments
+\f1\b0 : Reorders toolpaths dynamically during simulation and execution to prevent conflicts.\
+	\'95	
+\f0\b Flow
+\f1\b0 : Path Analysis \uc0\u8594  Reordering \u8594  Conflict Resolution}
