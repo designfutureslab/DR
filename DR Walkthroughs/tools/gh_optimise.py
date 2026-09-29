@@ -19,6 +19,11 @@ Output-identical:
      equivalent maths (rotating a plane about its own axes = rotating XY, then
      orienting XY onto the plane), but the per-plane work drops from ~14
      operations to 1. All controls (angles, axes, Pen Tilt) still work.
+Changes how you work:
+  8. a second Data Dam ("Program Dam") on the targets going into Create program,
+     so changing speeds, zone, pose or paper no longer rebuilds the whole robot
+     program on every nudge; press its play button when ready. The program name
+     is deliberately NOT dammed (it changes on every Save click).
 Changes a default setting:
   4. Create program 'Step Size' 1 mm -> 5 mm (error checking / simulation resolution)
   5. path tolerance slider 0.1 mm -> 0.25 mm (fewer planes, still finer than a pen line)
@@ -135,6 +140,39 @@ def add_object(doc, o):
     oc.item('ObjectCount').value = len(oc.chunks)
 
 
+def add_program_dam(doc, where):
+    objs, groups, wires = obj_info(doc)
+    dam = next((ob for ob in objs.values() if ob['chunk'].get('Name') == 'Data Dam'), None)
+    prog = next((ob for ob in objs.values() if ob['chunk'].get('Name') == 'Create program'), None)
+    if not dam or not prog or any((ob['cont'].get('NickName') or '') == 'Program Dam' for ob in objs.values()):
+        return
+    tgt = next(p for p in prog['ins'] if p.get('Name') == 'Targets')
+    src = sources(tgt)
+    if len(src) != 1:
+        return
+    pb = prog['cont'].child('Attributes').get('Bounds')
+    new, ids, new_id = clone_component(dam['chunk'], pb[0] - 105, pb[1] + pb[3] + 20)
+    container(new).item('NickName').value = 'Program Dam'
+    set_source(param_chunks(container(new))[0][0], src[0])
+    set_source(tgt, ids[('out', 'Data A')])
+    add_object(doc, new)
+    # give it the same magenta "Re Calculate" group as the first dam
+    for gid, g in groups.items():
+        gc = container(g['chunk'])
+        if dam['cont'].get('InstanceGuid') in g['members'] and len(g['members']) == 1:
+            gc.item('NickName').value = 'Re Calculate Drawing'
+            grp = R.Chunk(g['chunk'].rawname, 0, [R.Item(i.rawname, i.index, i.type, i.payload) for i in g['chunk'].items],
+                          [R.Chunk(c.rawname, c.index, [R.Item(i.rawname, i.index, i.type, i.payload) for i in c.items],
+                                   [R.Chunk(a.rawname, a.index, list(a.items), []) for a in c.chunks]) for c in g['chunk'].chunks])
+            c2 = container(grp)
+            c2.item('InstanceGuid').value = str(uuid.uuid4())
+            c2.item('NickName').value = 'Re Calculate Robot Program'
+            c2.item('ID', 0).value = new_id
+            add_object(doc, grp)
+            break
+    done.append(f'{where}: added "Program Dam" between the robot moves and Create program (Targets only)')
+
+
 def merge_reorient(doc, where):
     objs, groups, wires = obj_info(doc)
     reo = [ob for ob in objs.values() if (ob['cont'].get('NickName') or '').strip() == 'DFL re-orient planes']
@@ -210,6 +248,10 @@ def opt(path, doc):
                         it.value = src[0]
                 delete_object(doc, exp['cont'].get('InstanceGuid'))
                 done.append(f'{where}: preview now uses the polylines directly (removed Explode)')
+
+    # 8. second data dam before Create program
+    if not path:
+        add_program_dam(doc, where)
 
     # 6. merge the two re-orient passes into a single Orient
     if path and path[-1] == 'DR Path Planning':

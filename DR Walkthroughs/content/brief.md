@@ -95,7 +95,7 @@ This stage answers two questions: **where is the paper**, and **in what order ar
 - [4 pt plane In use] Which robot's calibration to use: Charlie, Darcy, or a custom one you measured.
 - [Get Latest Calibration Data] Downloads the newest corner measurements for the lab robots from GitHub.
 - [Entwine] **The drawing order.** Plug each tool's Drawing Data into this in the order you want them drawn: first input first.
-- [Dam] The Data Dam holds everything back until you press its play button, so the heavy calculation does not re-run on every tweak.
+- [Dam] **Re Calculate Drawing**: the first Data Dam. It holds your drawing back until you press its play button, so path planning does not re-run on every tweak.
 
 ?? Are Charlie and Darcy the names of the lab's two robot cells? And should students always pick the one they are booked on?
 
@@ -129,6 +129,7 @@ Now the planes become robot **targets**: positions plus how fast to get there an
 - [Zone Accuracy] How closely (in mm) the robot must pass through each point. A small zone lets the robot blend points into smooth motion without stopping at each one.
 - [# Strokes Per Refill] For the brush: how many strokes between paint-pot dips.
 - [Pen Change Pose AV Degrees] The six joint angles of the pose where the operator changes tools.
+- [Program Dam] **Re Calculate Robot Program**: the second Data Dam. Building and checking the robot program is the slowest step, so it waits here until you press play. Set your speeds and poses first, then release it once.
 
 ## Stage: Simulate and check
 @covers: #9ccc6148
@@ -208,17 +209,18 @@ The robot program can stop and show a message on the teach pendant: "Insert Stab
 2. **Calibrate your tool** with DFL staff if you are using your own pen: run the 4-point TCP calibration, enter the X, Y, Z result and turn on *Use Calibrated TCP*.
 3. **Clear the example data** and set your own curves in *Your drawing curves*.
 4. **Choose tools** and wire the curves into them. Set pressure and retract.
-5. **Set the drawing order** by plugging tools into *Entwine*, then press the **Data Dam** play button.
-6. **Simulate**. Scrub the slider, and fix any errors and warnings. Adjust *Pen Tilt* if the wrist flips.
-7. **Name the project**, choose the USB folder and click **Save as URP**.
-8. At the robot: **File → Load Program**, select your `.urp`, run the **pen test** first, then the drawing.
+5. **Set the drawing order** by plugging tools into *Entwine*, then press play on **Re Calculate Drawing**.
+6. **Set speeds and poses**, then press play on **Re Calculate Robot Program**.
+7. **Simulate**. Scrub the slider, and fix any errors and warnings. Adjust *Pen Tilt* if the wrist flips, then press both play buttons again.
+8. **Name the project**, choose the USB folder and click **Save as URP**.
+9. At the robot: **File → Load Program**, select your `.urp`, run the **pen test** first, then the drawing.
 
 ?? Is there a booking or sign-off step with DFL staff before running on the robot that should be listed here?
 
 ## Gotchas
 @focus: Save URP, Number of planes (should not exceed 40,000)
 
-- **Nothing updates?** The Data Dam is holding the old result. Press its play button.
+- **Nothing updates?** A Data Dam is holding the old result. There are two, both in magenta groups: **Re Calculate Drawing** (after the tools) and **Re Calculate Robot Program** (before the simulation). Press play on the first, then the second.
 - **Too many planes** (over 40,000): simplify the drawing, use the cleanup tools, or raise the path tolerance.
 - **Save button flashes red:** no folder is chosen, or the USB stick is not mounted.
 - **"File already exists" on the robot:** every save needs a new name. The click counter does this for you, so don't reset it mid-session.

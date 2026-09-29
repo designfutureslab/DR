@@ -33,7 +33,7 @@ A **Robots** component. It writes the finished program to disk as `.urp` (and su
 A **Robots** component. The robot wants joint angles in radians; people think in degrees. This converts the six pose angles typed in the panels.
 
 ## Data Dam
-Holds data back until you press its play button. It stops the heavy robot calculation from re-running every time you nudge a slider. If nothing changes after an edit, press play.
+Holds data back until you press its play button. There are two: **Re Calculate Drawing** holds the drawing before path planning, and **Re Calculate Robot Program** holds the targets before the robot program is built and checked. They stop the heavy calculations from re-running every time you nudge a slider. If nothing changes after an edit, press play on the first, then the second.
 
 ## Entwine
 Combines several inputs into one data tree, giving each input its own branch number. On the main canvas the input order is the **drawing order** of the tools. Inside the tool builder it packs the eight Drawing Data slots.
