@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DR1 & DR2 Grasshopper Script Walkthrough</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+        }
+        h1 {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+        h2 {
+            font-size: 1.5em;
+            margin-top: 40px;
+            margin-bottom: 10px;
+        }
+        h3 {
+            font-size: 1.2em;
+            margin-top: 30px;
+            margin-bottom: 10px;
+        }
+        p, ol {
+            margin-bottom: 20px;
+        }
+        .image-container {
+            max-width: 100%;
+            margin-bottom: 20px;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>DR1 & DR2 Grasshopper Script Walkthrough</h1>
+
+    <h2>1. DFL Robot Setup</h2>
+    <div class="image-container">
+        <img src="img/DFL Robot Setup.png" alt="DFL Robot Setup">
+    </div>
+    <p>This section initializes the robot and sets up its initial parameters.</p>
+    <ol>
+        <li><strong>Robot Selection:</strong> Chooses the UR5 robot model and converts initial pose angles into radians.</li>
+        <li><strong>Speed and Accuracy:</strong> Configures the robot's controlled and transfer speeds, along with zone accuracy for precision.</li>
+        <li><strong>Fixture Setup:</strong> Specifies the fixture in use, with custom offsets for accurate robot positioning within the workspace.</li>
+        <li><strong>Tool Setup:</strong> Configures the pen tool’s parameters, including length, diameter, weight, and TCP (Tool Center Point) settings for precise operation.</li>
+    </ol>
+
+    <h2>2. DFL Import Drawing and Order Program</h2>
+    <div class="image-container">
+        <img src="img/DFL Import Drawing and Order Program.png" alt="DFL Import Drawing and Order Program">
+    </div>
+    <p>This cluster handles the import of drawing data from Illustrator files and organizes the drawing operations.</p>
+    <ol>
+        <li><strong>Drawing Import:</strong> Imports multiple layers (Cyan, Magenta, Yellow, Black) from Illustrator, with options for strokes or fills.</li>
+        <li><strong>Operations Order:</strong> Organizes imported curves into a sequence for execution.</li>
+        <li><strong>Point Management:</strong> Controls the number of points to ensure they stay within acceptable limits, maintaining efficiency.</li>
+    </ol>
+
+    <h2>3. DFL Plane and Target Generation</h2>
+    <div class="image-container">
+        <img src="img/DFL Plane and Target Generation.png" alt="DFL Plane and Target Generation">
+    </div>
+    <p>This section generates planes and targets for the robot to follow during the drawing process.</p>
+    <ol>
+        <li><strong>Curve to Plane Conversion:</strong> Translates curves into planes that define drawing targets for the robot.</li>
+        <li><strong>Target Adjustment:</strong> Fine-tunes target planes to align them with the robot’s TCP and workspace.</li>
+    </ol>
+
+    <h2>4. DFL Linear Hatch</h2>
+    <div class="image-container">
+        <img src="img/DFL Linear Hatch.png" alt="DFL Linear Hatch">
+    </div>
+    <p>This part of the script generates linear hatches within specified boundaries, adding detailed fills to the drawing.</p>
+    <ol>
+        <li><strong>Hatch Parameters:</strong> Defines frequency, pen tip diameter, and angle for the hatches.</li>
+        <li><strong>Hatch Creation:</strong> Generates linear hatches within specified boundaries and trims them to fit surface limits.</li>
+    </ol>
+
+    <h2>5. Robotic Movements</h2>
+    <div class="image-container">
+        <img src="img/DFL Robotic movements.png" alt="DFL Robotic Movements">
+    </div>
+    <p>This cluster manages the actual movement commands for the robot, including custom pop-up messages for user interaction.</p>
+    <ol>
+        <li><strong>Custom Pop-ups:</strong> Displays messages to the user during the robot’s operation, prompting necessary actions like pen changes.</li>
+        <li><strong>Linear Movements:</strong> Commands the robot to make linear movements based on the target planes with controlled speeds.</li>
+        <li><strong>Completion Message:</strong> Notifies the user when the job is complete, with instructions for cleanup.</li>
+    </ol>
+
+    <h2>6. DFL Simulate and Export</h2>
+    <div class="image-container">
+        <img src="img/DFL Simulate and Export.png" alt="DFL Simulate and Export">
+    </div>
+    <p>This section simulates the drawing process and prepares the data for export to the robot controller.</p>
+    <ol>
+        <li><strong>Simulation:</strong> Runs a simulation of the robot’s drawing path, identifying potential errors or warnings.</li>
+        <li><strong>Analysis:</strong> Provides feedback on the program’s performance, including duration, errors, and warnings.</li>
+        <li><strong>Export:</strong> Saves the program as a URP file for the UR5 robot, with options for backup and file management.</li>
+    </ol>
+
+    <h2>Components Explained</h2>
+
+    <h3>1. Reorient Planes in Axis for TCP</h3>
+    <div class="image-container">
+        <img src="img/DFL re orient planes in axis for TCP.png" alt="DFL Reorient Planes in Axis for TCP">
+    </div>
+    <p><strong>Purpose:</strong> Fine-tunes the orientation of planes along a specified axis to ensure the Tool Center Point (TCP) is correctly aligned for drawing operations.</p>
+    <p><strong>Flow:</strong> Start → Plane Input → Rotation Axis → Fine Adjustment → Rotated Planes Output</p>
+
+    <h3>2. Curve to Target Plane</h3>
+    <div class="image-container">
+        <img src="img/DFL Curve to Target Plane.png" alt="DFL Curve to Target Plane">
+    </div>
+    <p><strong>Purpose:</strong> Converts drawing curves into target planes for the robot to follow.</p>
+    <p><strong>Flow:</strong> Curves Input → Transfer Plane → Target Planes Output</p>
+
+    <h3>3. Make Transfer and Pressure Planes</h3>
+    <div class="image-container">
+        <img src="img/DFL make Transfer and Pressure Planes.png" alt="DFL Make Transfer and Pressure Planes">
+    </div>
+    <p><strong>Purpose:</strong> Creates transfer and pressure planes that control the pen’s movement between drawing paths and how much pressure it applies.</p>
+    <p><strong>Flow:</strong> Pen Transfer Height → Pen Pressure Settings → Pressure and Transfer Planes Output</p>
+
+    <h3>4. Add Leads</h3>
+    <div class="image-container">
+        <img src="img/DFL Add leads.png" alt="DFL Add Leads">
+    </div>
+    <p><strong>Purpose:</strong> Adds lead-in and lead-out segments to the drawing paths to ensure smooth transitions.</p>
+    <p><strong>Flow:</strong> Curve Input → Lead Creation → Curves with Leads Output</p>
+
+    <h3>5. Four Point Calibration</h3>
+    <div class="image-container">
+        <img src="img/DFL Four Point Calibration.png" alt="DFL Four Point Calibration">
+    </div>
+    <p><strong>Purpose:</strong> Calibrates the TCP by defining four points on the workspace, ensuring accurate alignment of the robot’s movements.</p>
+    <p><strong>Flow:</strong> Calibration Points Input → Calibration Process → Calibrated Plane Output</p>
+
+    <h3>6. Custom Popup</h3>
+    <div class="image-container">
+        <img src="img/DFL Custom Popup.png" alt="DFL Custom Popup">
+    </div>
+    <p><strong>Purpose:</strong> Creates custom pop-up messages for user interaction during the robot’s operation.</p>
+    <p><strong>Flow:</strong> Popup Text → Display Conditions → Popup Command Output</p>
+
+    <h3>7. Drawing Setup</h3>
+    <div class="image-container">
+        <img src="img/DFL Drawing Setup.png" alt="DFL Drawing Setup">
+    </div>
+    <p><strong>Purpose:</strong> Configures the drawing setup, including paper size and alignment within the workspace.</p>
+    <p><strong>Flow:</strong> Paper Size → Calibration Plane → Paper Plane Output</p>
+
+    <h1>DR2 Advanced Script Overview</h1>
+
+    <h2>Layer Management and Multiple Tool Heads</h2>
+
+    <h3>1. Layer Prioritization and Operations Order</h3>
+    <div class="image-container">
+        <img src="img/DR2.png" alt="DR2 Layer Management and Tool Heads">
+    </div>
+    <p><strong>Purpose:</strong> Manages multiple drawing layers with precise control over execution order.</p>
+    <p><strong>Flow:</strong> Layer Import → Operations Order → Execution</p>
+
+    <h3>2. Multiple Tool Heads</h3>
+    <p><strong>Tool Head Switching:</strong> Enables switching between different tools based on layer and task requirements.</p>
+    <p><strong>Flow:</strong> Tool Selection → Tool Data Management → TCP Adjustment</p>
+
+    <h3>3. Advanced Path Planning and Simultaneous Operations</h3>
+    <p><strong>Advanced Path Optimization:</strong> Optimizes the robot’s movements to reduce tool change time and ensure efficiency.</p>
+    <p><strong>Flow:</strong> Path Generation → Optimization → Execution Order</p>
+
+</body>
+</html>
